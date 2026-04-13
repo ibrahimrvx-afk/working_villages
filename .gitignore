@@ -1,0 +1,19 @@
+# Luacheck cache
+.luacheckcache
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Compiled Venus files (keep sources, not outputs)
+# working_villagers/modutil/*.lua  <- keep these, they're runtime files
+
+# Test outputs
+working_villagers/modutil/LuaVenusCompiler/testout/
