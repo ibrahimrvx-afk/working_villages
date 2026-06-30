@@ -5,6 +5,7 @@ All notable changes to this project will be documented here.
 ## [Unreleased] — Improved Fork
 
 ### Added
+- **Miner job** (`working_villages:job_miner`) — searches nearby stone for ore veins and digs them out; tunnels through plain stone if no ore is in range. Avoids protected areas and remembers unreachable/undiggable spots for a few minutes like the woodcutter does. Deposits everything except its pick and food to its assigned chest. Included in the dual-skill combination list.
 - **Wizard Stick** (`working_villages:wizard_stick`) — craftable tool with full GUI wizard for villager management. Replaces manual form navigation. Features: job assignment, dual job assignment, work area definition (circle/square), work hours, bed assignment, home assignment, chest auto-assign, rename, speed control, teleport, pause/resume, chat bubble toggle, chicken config, inventory view, job data reset.
 - **Chickener job** (`working_villages:job_chickener`) — collects eggs, hatches them, randomly feeds chickens wheat seeds, breeds chickens using seeds from chest, culls excess chickens, collects raw chicken, deposits to chest. Min/max chicken counts configurable via Wizard Stick.
 - **Fisher job** (`working_villages:job_fisher`) — finds water edges, fishes with 40% catch chance per attempt, deposits fish to chest.
@@ -17,6 +18,8 @@ All notable changes to this project will be documented here.
 - **Home assignment** — click any ground position via Wizard Stick to set home.
 
 ### Fixed
+- **Job inventory overflow** — `working_villages.job_inv` was a fixed 32-slot detached inventory, but registering the dual-skill combinations alone produces more than 32 items; anything past the cap was silently dropped by `add_item` and never showed up in the classic job-change form. The inventory now grows to fit however many jobs are actually registered.
+- **`find_ground_below(false)` crash** — `find_adjacent_clear` can return `false` when no clear adjacent spot exists, but `builder.lua` (and the unused `woodcutter.lua`) passed that straight into `find_ground_below`, which calls `vector.new()` on it. Builder could crash while building or finishing a house. Now guarded the same way `farmer.lua`/`plant_collector.lua` already did, and `find_ground_below` itself now tolerates a `false`/`nil` input as defense in depth.
 - **Pathfinder fence/wall stuck** — Villagers no longer clip through or get stuck in fence corners. Fences, walls, bars, gates, railings are treated as solid horizontal barriers. Diagonal transitions through fence corners are blocked.
 - **Stuck-in-corner recovery** — Villager detects being stuck on same waypoint for 80+ ticks and applies random nudge to escape, then re-paths.
 - **Farmer random drop collection** — Farmer no longer picks up grass, sticks, or other random ground items. Only collects items with `farming:` prefix matching known crop/seed definitions.

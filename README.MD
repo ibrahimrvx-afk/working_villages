@@ -10,9 +10,6 @@ The plan is to make villagers build up their own villages.
   * built up by the villagers
 * villagers
   * trading and building up an economy
-  * working / doing their jobs
-* jobs
-  * miner, farmer, woodcutter and many more
 
 ## implemented Features
 no crafting recipes yet (you will have to use creative)
@@ -31,20 +28,49 @@ features:
   * items can be exchanged in the inventory
   * home can be set in the inventory
   * jobs can be changed in the inventory
+* wizard stick
+  * craftable tool with a full GUI wizard for managing a villager
+  * assign a job, or two jobs at once with the dual-skill system below
+  * define a work area (circle or square) the villager won't leave
+  * set work hours so the villager only works during a chosen shift
+  * assign a bed and a home position by clicking the target node
+  * assign a chest for the villager to deposit/take items from
+  * set the villager's walk speed, rename it, or teleport it to you
+  * toggle a chat bubble that shows the villager's current mood
+* mood system
+  * villagers track a mood value (0-100) based on whether they have
+    a bed, a home, are working, or are stuck
+  * visible in the wizard stick GUI and optionally as a chat bubble
+* dual-skill system
+  * combine any two of the jobs below into a single villager
+  * the villager alternates between both jobs automatically
+  * assign with the wizard stick
 * jobs
   * jobs define what the villagers should do
   * jobs can be changed in the inventory by clicking change job
   * in the job change form the jobs can be changed by replacing the current job by one of the jobs below (shift+click possible)
 * registered jobs:
-  * woodcutter/lumberjack (cutting trees and planting saplings)
+  * miner (searching nearby stone for ore veins, tunneling through plain stone if none is found)
   * plant collector (collecting all sort of fauna to produce dyes etc.)
   * player follower (following any player, night active)
   * builder (builds the nearest building defined by a building marker)
+  * farmer (plants, tends and harvests farmland crops)
+  * chickener (collects eggs, hatches and breeds chickens, harvests raw chicken)
+  * fisher (fishes at the water's edge and deposits the catch)
+  * guard (keeps watch and chases off nearby enemies)
+  * any dual-skill combination of the jobs above
 * testing jobs:
   * snowclearer (clearing snow away)
   * torcher (following player and placing torches in the dark, night active)
 
 for developing jobs, villagers, etc. read [api.md](api.MD)
+
+## Settings
+These can be configured in the engine's settings menu or `minetest.conf`:
+* `working_villages_enable_spawn` — let self-employed villagers spawn on their own (default: off)
+* `working_villages_enable_debug_tools` — adds debug items to the creative inventory (default: off)
+* `working_villages_enable_debug_checks` — extra runtime asserts that help catch bugs, small performance cost (default: on)
+* `working_villages_owner_protection` — controls whether villagers may dig/build in protected areas (`false`/`true`/`ignore`/a prefix), see `settingtypes.txt` for details (default: `false`, i.e. villagers never grief protected land)
 
 ## screenshots
 ![Screenshot 1](screenshot.png)
