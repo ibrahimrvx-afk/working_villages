@@ -1,0 +1,74 @@
+local init = os.clock()
+minetest.log("action", "["..minetest.get_current_modname().."] loading init")
+
+working_villages={
+	modpath = minetest.get_modpath("working_villages"),
+}
+
+if not minetest.get_modpath("modutil") then
+    dofile(working_villages.modpath.."/modutil/portable.lua")
+end
+
+modutil.require("local_require")(working_villages)
+local log = working_villages.require("log")
+
+function working_villages.setting_enabled(name, default)
+  local b = minetest.settings:get_bool("working_villages_enable_"..name)
+  if b == nil then
+    if default == nil then return false end
+    return default
+  end
+  return b
+end
+
+working_villages.require("groups")
+working_villages.require("forms")
+working_villages.require("talking")
+working_villages.require("building")
+working_villages.require("storage")
+
+-- base
+working_villages.require("api")
+working_villages.require("register")
+working_villages.require("commanding_sceptre")
+
+-- NEW: Wizard Stick (replaces manual sceptre, has full GUI wizard)
+working_villages.require("wizard_stick")
+working_villages.require("path_visualizer")
+
+working_villages.require("deprecated")
+
+-- job helpers
+working_villages.require("jobs/util")
+working_villages.require("jobs/empty")
+
+-- base jobs
+working_villages.require("jobs/builder")
+working_villages.require("jobs/follow_player")
+working_villages.require("jobs/guard")
+working_villages.require("jobs/plant_collector")
+working_villages.require("jobs/farmer")
+working_villages.require("jobs/miner")
+
+-- testing jobs
+working_villages.require("jobs/torcher")
+working_villages.require("jobs/snowclearer")
+
+-- NEW: Chickener job (collect eggs, hatch, collect raw chicken, deposit to chest)
+working_villages.require("jobs/chickener")
+working_villages.require("jobs/fisher")
+
+-- NEW: Dual-skill system (combine two jobs into one villager)
+working_villages.require("jobs/dual_skill")
+
+if working_villages.setting_enabled("spawn", false) then
+  working_villages.require("spawn")
+end
+
+if working_villages.setting_enabled("debug_tools", false) then
+  working_villages.require("util_test")
+end
+
+-- ready
+local time_to_load = os.clock() - init
+log.action("loaded init in %.4f s", time_to_load)
