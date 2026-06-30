@@ -74,8 +74,7 @@ These can be configured in the engine's settings menu or `minetest.conf`:
 ## screenshots
 ![Screenshot 1](screenshot.png)
 ![Screenshot 2](screenshot.2.png)
-![Screenshot 3](screenshot.3.png)
-![Screenshot 4](screenshot.4.png)
+![Screenshot 3](screenshot.4.png)
 
 ## Submodules
 Currently working_villages only has the modutil portable submodule.
