@@ -3,7 +3,6 @@
 This mod adds Villagers performing work.
 The plan is to make villagers build up their own villages.
 
-[working_villages forum page](https://forum.minetest.net/viewtopic.php?f=9&t=17429)
 
 ## Planned Features
 * villages
@@ -85,7 +84,7 @@ This means you can either download the modutil mod and enable it or get the subm
 
 When cloning add "--recursive" option to clone including all submodules:
 ```
-git clone --recursive https://github.com/theFox6/working_villages.git
+git clone --recursive https://github.com/ibrahimrvx-afk/working_villages.git
 ```
 
 If one of the submodule folders is empty use:
@@ -106,7 +105,7 @@ If modutil is not present you will get the following error:
 ## cloning
 When cloning first add "--recursive" option to clone including all submodules:
 ```
-git clone --recursive https://github.com/theFox6/working_villages.git
+git clone --recursive https://github.com/ibrahimrvx-afk/working_villages.git
 ```
 else the submodule folders will be empty.
 
